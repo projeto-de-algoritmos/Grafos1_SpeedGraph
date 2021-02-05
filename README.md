@@ -1,17 +1,5 @@
-**!! Atenção: Renomeie o seu repositório para (Tema)_(NomeDoProjeto). !!** 
-
-Temas:
- - Grafos1
- - Grafos2
- - PD
- - D&C
- - Greed
- - Final 
- 
- **!! *Não coloque os nomes dos alunos no título do repositório*. Exemplo de título correto: Grafos2_Labirinto-do-Minotauro !!**
- 
- (Apague essa seção)
-
+# Observação: 
+O projeto ainda não foi decido, mas a dupla decidiu criar para ir adiantando os trabalhos. 
 # NomedoProjeto
 
 **Número da Lista**: X<br>
