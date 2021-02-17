@@ -1,6 +1,4 @@
-# Observação: 
-O projeto ainda não foi decido, mas a dupla decidiu criar para ir adiantando os trabalhos. 
-# NomedoProjeto
+# SpeedGraph
 
 **Número da Lista**: X<br>
 **Conteúdo da Disciplina**: XXXXXXXXXX<br>
