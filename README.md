@@ -1,27 +1,32 @@
 # SpeedGraph
 
-**Número da Lista**: X<br>
-**Conteúdo da Disciplina**: XXXXXXXXXX<br>
+**Número da Lista**: 1<br>
+**Conteúdo da Disciplina**: Grafos 1<br>
 
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 18/0028324  |  Thiago Luiz de Souza Gomes |
+| 18/0033743  |  João Pedro Silva de Carvalho |
 
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+Link da [apresentação](https://youtu.be/WYPGSKC2Hhk)
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+![primeira tela](screenshots/primeiratela.jpg)
+<br>
+![segunda tela](screenshots/segundatela.jpg)
+<br>
+![terceira tela](screenshots/terceiratela.jpg)
+<br>
 
 ## Instalação 
-**Linguagem**: xxxxxx<br>
-**Framework**: (caso exista)<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
+**Linguagem**: Python<br>
+Baixar python3.5 ou mais nova 
 
 ## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
+Rodar o comando python3 main.py no terminal.
+
 
 ## Outros 
 Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
