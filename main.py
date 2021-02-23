@@ -197,7 +197,7 @@ class Game:
                     break
                 print("Insira uma aresta diferente")
         
-        for _ in range(100):
+        for _ in range(1000):
             p1.play()
             p2.play()
 
@@ -208,7 +208,7 @@ class Game:
             t2 = p2.time[1]
         elif tipo == '1':
             t1 = p1.time[0]
-            t2 = p1.time[0]
+            t2 = p2.time[0]
         else:
             t1 = p1.time[1] + p1.time[0]
             t2 = p2.time[1] + p2.time[0]
