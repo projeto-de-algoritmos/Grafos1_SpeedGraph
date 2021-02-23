@@ -4,14 +4,18 @@ from collections import deque
 class Graph:
     def __init__(self, nodes):
         self.nodes = nodes
-        self.adj = [list()]*nodes
+        self.adj = list()
+        for i in range(nodes):
+            self.adj.append(list())
         self.visited = [0]*nodes
+        self.q = deque()
     
     def add_edge(self, v, u):
         for i in self.adj[u]:
             if i == v:
                 return False
         
+
         self.adj[u].append(v)
         self.adj[v].append(u)
 
@@ -27,35 +31,34 @@ class Graph:
         
         
     def bfs(self, node):
-        q = deque()
-        q.append(node)
+        self.q.append(node)
         self.visited[node]=1
         
-        while (len(q) > 0):
-          
-            u = q.popleft()
+        while (len(self.q) > 0):
+            u = self.q.popleft()
               
             for to in self.adj[u]:
                 if self.visited[to] == 0:
                     self.visited[to] = 1
-                    q.append(to)
+                    self.q.append(to)
         
     def clear_vis(self):
         for i in range(len(self.visited)):
             self.visited[i] = 0
         
     def play(self):
-      
-        self.time_dfs = time.time() 
+        
         self.clear_vis()
+        self.time_dfs = time.time() 
         for i in range(self.nodes):
             if self.visited[i] == 0:
                 self.dfs(i)
         
         self.time_dfs = time.time() - self.time_dfs
         
-        self.time_bfs = time.time()
+        self.q.clear()
         self.clear_vis()
+        self.time_bfs = time.time()
         for i in range(self.nodes):
             if self.visited[i] == 0:
                 self.bfs(i)
@@ -71,21 +74,63 @@ class Player:
         self.n = n
         self.m = m
         self.g = Graph(n)
+        self.time = [0, 0]
     
     def add_edge(self, u, v):
-        if self.g.add_edge(u, v) == False:
-            return False
-        return True
+        return self.g.add_edge(u, v)
     
     def play(self):
-        self.time = self.g.play()
+        a, b = self.g.play()
+        self.time[0] += a
+        self.time[1] += b
 
 
 
 class Game:
+    def input_num(self, msg, min, max):
+        num = input(msg + ' ')
+        while True:
+
+            if not num.isdigit():
+                num = input("Digite um número válido ")
+                continue
+
+            num = int(num)
+
+            if num > max or num < min:
+                msg = "Digite um numero entre" + str(min) + "e" + str(max) + ' '
+                num = input(msg)
+                continue
+
+            return num
+
+    def input_pair(self, msg, min, max):
+        t = input(msg).split()
+
+        while True:
+            if len(t) != 2:
+                t = input("Insira um par de numeros ").split()
+                continue
+
+            a, b = t
+
+            if not a.isdigit() or not b.isdigit():
+                t = input("Digite um par de números válidos separados por um espaço ").split()
+                continue
+
+            a = int(a)
+            b = int(b)
+
+            if a > max or a < min or b < min or b > max or a == b:
+                msg = "Digite um par de numeros diferentes entre " + str(min) + " e " + str(max) + ' '
+                t = input(msg).split()
+                continue
+    
+            return a, b
+    
     def play(self):
-        n = int(input("Insira o numero de vertices "))
-        m = int(input("Insira o numero de arestas "))
+        n = self.input_num("Insira o numero de vértices", 0, 100)
+        m = self.input_num("Insira o numero de arestas", n-1, n*(n-1)//2)
         
         nome1 = input("Jogador 1 insira o seu nome: ")
         p1 = Player(n, m, nome1)
@@ -97,18 +142,25 @@ class Game:
 
         print(p1.nome, "escolha suas arestas")
         for _ in range(m):
-            u, v = map(int, input().split())
-            p1.add_edge(u, v)
+            while True:
+                u, v = self.input_pair('', 0, n-1)
+                if p1.add_edge(u, v):
+                    break
+                print("Insira uma aresta diferente")
         
         print(p2.nome, "escolha suas arestas")
         for _ in range(m):
-            u, v = map(int, input().split())
-            p2.add_edge(u, v)
+            while True:
+                u, v = self.input_pair('', 0, n-1)
+                if p2.add_edge(u, v):
+                    break
+                print("Insira uma aresta diferente")
         
-        p1.play()
-        p2.play()
+        for _ in range(100):
+            p1.play()
+            p2.play()
 
-        tipo = input("Selecione o modo de jogo:\n0 para decidir no BFS\n1 para decidir no DFS\n2 para decidir em ambos")
+        tipo = input("Selecione o modo de jogo:\n0 para decidir no BFS\n1 para decidir no DFS\n2 para decidir em ambos\n")
 
         if tipo == '0':
             t1 = p1.time[1]
@@ -126,8 +178,11 @@ class Game:
             winner = p1.nome
         else:
             winner = p2.nome
+
         
         print("Parabens", winner, "ganhou")
+        print("Margem:", t1, t2)
+
 
 game = Game()
 game.play()
