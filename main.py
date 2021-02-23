@@ -3,25 +3,42 @@ from collections import deque
 
 class Graph:
     def __init__(self, nodes):
+        
+        """
+    Esta é a função construtora e recebe os vertíces como parâmetros.    
+
+        """
+
         self.nodes = nodes
         self.adj = list()
+        
         for i in range(nodes):
             self.adj.append(list())
+        
         self.visited = [0]*nodes
         self.q = deque()
     
     def add_edge(self, v, u):
+        """
+    
+    Esta função conecta os vertices formando as arestas e recebe dois vertíces.
+        
+        """
         for i in self.adj[u]:
             if i == v:
                 return False
         
-
         self.adj[u].append(v)
         self.adj[v].append(u)
 
         return True
         
     def dfs(self, node):
+        """
+    Essa função realiza a busca em profundidade e recebe como parâmetro o vertice atual do dfs e verifica se ja o visitou.   
+        """
+
+
         self.visited[node] = 1
         
         for to in self.adj[node]:
@@ -31,10 +48,16 @@ class Graph:
         
         
     def bfs(self, node):
+
+        """
+    Essa função realiza a busca em largura e recebe como parâmetro o vertice atual do bfs e verifica se ja o visitou.   
+        """
+        
         self.q.append(node)
         self.visited[node]=1
         
         while (len(self.q) > 0):
+           
             u = self.q.popleft()
               
             for to in self.adj[u]:
@@ -43,13 +66,20 @@ class Graph:
                     self.q.append(to)
         
     def clear_vis(self):
+        """
+    Essa função reinicializa o vetor de visitados e não possuí parâmetro.    
+        """
         for i in range(len(self.visited)):
             self.visited[i] = 0
         
     def play(self):
-        
+        """
+    Esta função utiliza as funções anteriores e retorna o tempo gasto no dfs e no bfs
+        """
+
         self.clear_vis()
         self.time_dfs = time.time() 
+        
         for i in range(self.nodes):
             if self.visited[i] == 0:
                 self.dfs(i)
@@ -59,6 +89,7 @@ class Graph:
         self.q.clear()
         self.clear_vis()
         self.time_bfs = time.time()
+        
         for i in range(self.nodes):
             if self.visited[i] == 0:
                 self.bfs(i)
@@ -69,7 +100,11 @@ class Graph:
 
 
 class Player:
+    """
+    Essa classe descreve um jogador 
+    """
     def __init__(self, n, m, nome):
+        
         self.nome = nome
         self.n = n
         self.m = m
@@ -80,6 +115,7 @@ class Player:
         return self.g.add_edge(u, v)
     
     def play(self):
+        
         a, b = self.g.play()
         self.time[0] += a
         self.time[1] += b
@@ -87,7 +123,12 @@ class Player:
 
 
 class Game:
+    """
+   Essa classe possuí todos os prints e o menu do jogo 
+    """
+
     def input_num(self, msg, min, max):
+        
         num = input(msg + ' ')
         while True:
 
